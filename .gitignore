@@ -39,3 +39,4 @@
 *.vcxproj
 *.vcxproj.*
 *.sln
+packages.config
