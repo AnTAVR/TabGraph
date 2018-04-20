@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 16:13:27 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/04/20 19:45:55 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/04/20 19:52:54 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@
 #include <TabTime.hpp>
 #include <TabInput.hpp>
 
-namespace sf{
-	class RenderWindow;
-}
-
-
-namespace TabGraph 
+namespace TabGraph
 {
 	class Window;
 	class Manager
@@ -31,8 +26,13 @@ namespace TabGraph
 			~Manager();
 			static void		CreateWindow(const int &, const int &, const std::string &);
 			static float	GetDeltaTime();
+			static float	GetTime();
 		private:
-			Window		*_window;
+			void	UpdateDeltaTime();
+			void	UpdateNodes();
+			Window	*_window;
+			float	_deltaTime;
+			float	_time;
 	};
 
 }
