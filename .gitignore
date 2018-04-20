@@ -34,6 +34,8 @@
 .DS_Store
 
 # Visual Studio
+[Dd]ebug
+[Rr]elease
 .vscode/
 .vs/
 *.vcxproj

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TabNode.cpp                                        :+:      :+:    :+:   */
+/*   Node.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <TabNode.hpp>
 #include <algorithm>
+#include "Node.hpp"
 
-namespace TabGraph {
+namespace TabGraph
+{
 	Node::Node() : _references(0)
 	{
 		AddRef();

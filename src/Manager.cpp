@@ -10,17 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <TabManager.hpp>
-#include <TabWindow.hpp>
+#include "Manager.hpp"
 
 namespace TabGraph
 {
 	Manager tabGraph;
 
-	Manager::Manager() :	_window(nullptr)
-	{
-
-	}
+	Manager::Manager() : _window(nullptr)
+	{}
 
 	Manager::~Manager()
 	{
@@ -28,13 +25,15 @@ namespace TabGraph
 			delete _window;
 	}
 
-	void	Manager::CreateWindow(const int &x, const int &y, const std::string &name)
+	void	Manager::CreateWindow(
+						const int& x, const int& y,
+						const std::string& title)
 	{
-		tabGraph._window = new Window(x, y, name);
+		tabGraph._window = new Window(x, y, title);
 	}
 
 	float	Manager::GetDeltaTime()
 	{
-		return (1);
+		return (tabGraph._deltaTime);
 	}
 }

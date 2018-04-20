@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TabManager.hpp                                     :+:      :+:    :+:   */
+/*   Node.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/20 16:13:27 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/04/20 19:52:54 by gpinchon         ###   ########.fr       */
+/*   Created: 2018/04/20 16:09:53 by gpinchon          #+#    #+#             */
+/*   Updated: 2018/04/20 19:32:18 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <TabNode.hpp>
-#include <TabTime.hpp>
-#include <TabInput.hpp>
+#include <vector>
 
 namespace TabGraph
 {
-	class Window;
-	class Manager
+	class Node
 	{
-		public:
-			Manager();
-			~Manager();
-			static void		CreateWindow(const int &, const int &, const std::string &);
-			static float	GetDeltaTime();
-			static float	GetTime();
-		private:
-			void	UpdateDeltaTime();
-			void	UpdateNodes();
-			Window	*_window;
-			float	_deltaTime;
-			float	_time;
-	};
+	public:
+		Node();
+		virtual ~Node();
+		void	Release();
+		int		GetRef() const;
+		void	AddRef();
+		void	AddChild(Node* const);
+		void	RemoveChild(Node* const);
 
+		virtual void	update() = 0;
+
+	protected:
+		int					_references;
+		std::vector<Node*> _children;
+	};
 }
