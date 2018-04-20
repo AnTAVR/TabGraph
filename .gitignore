@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+.DS_Store
+
+# Visual Studio
+.vscode/
+.vs/
+*.vcxproj
+*.vcxproj.*
+*.sln
