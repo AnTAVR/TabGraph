@@ -30,6 +30,13 @@ namespace TabGraph
 		virtual void	update() = 0;
 
 	protected:
+		/*
+		** Au lieu d'utiliser une variable int,
+		** il faudrait reflechir a l'utilisation de shared_ptr :
+		** http://en.cppreference.com/w/cpp/memory/shared_ptr
+		** c'est + mieux o/
+		** https://stackoverflow.com/questions/106508/what-is-a-smart-pointer-and-when-should-i-use-one
+		*/
 		int					_references;
 		std::vector<Node*> _children;
 	};

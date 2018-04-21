@@ -10,30 +10,70 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <thread>
 #include "Manager.hpp"
 
 namespace TabGraph
 {
-	Manager tabGraph;
+	Manager handler;
 
-	Manager::Manager() : _window(nullptr)
-	{}
+	/* ********************************* */
 
-	Manager::~Manager()
-	{
-		if (_window)
-			delete _window;
-	}
+	Manager::Manager() {}
+	Manager::~Manager() {}
 
 	void	Manager::CreateWindow(
-						const int& x, const int& y,
-						const std::string& title)
+						const int& w, const int& h,
+						const std::string& t)
 	{
-		tabGraph._window = new Window(x, y, title);
+		handler._window = new sf::RenderWindow(sf::VideoMode(w, h), t);
+		handler._window()->setFramerateLimit(60);
 	}
 
-	float	Manager::GetDeltaTime()
+	/*
+	** http://www.cplusplus.com/reference/chrono/duration/count/
+	*/
+	double	Manager::GetDeltaTime()
 	{
-		return (tabGraph._deltaTime);
+		return handler._deltaTime().count();
+	}
+
+	/* ********************************* */
+
+	inline void	Manager::UpdateEvents(sf::Event& ev)
+	{
+		while (handler._window()->pollEvent(ev))
+		{
+			if (ev.type == sf::Event::Closed)
+				handler._window()->close();
+		}
+	}
+
+	/*
+	** http://www.cplusplus.com/reference/chrono/high_resolution_clock/now/
+	*/
+	inline void	Manager::UpdateDeltaTime(time_point<steady_clock>& tic)
+	{
+		handler._deltaTime = duration_cast<duration<double, std::micro>>(
+			high_resolution_clock::now() - tic);
+		// ligne necessaire ?
+		//std::this_thread::sleep_for(handler._deltaTime());
+	}
+
+	/* ********************************* */
+
+	void	Manager::Run()
+	{
+		sf::Event ev;
+		time_point<steady_clock> tic;
+
+		while (handler._window()->isOpen())
+		{
+			tic = high_resolution_clock::now();
+			UpdateEvents(ev);
+
+			// some things
+			UpdateDeltaTime(tic);
+		}
 	}
 }

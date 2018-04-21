@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "SFML\Graphics\RenderWindow.hpp"
+//#include "SFML\Graphics\RenderWindow.hpp"
 
 namespace TabGraph
 {
@@ -24,6 +24,5 @@ namespace TabGraph
 
 	private:
 		Window();
-		sf::RenderWindow *_window;
 	};
 }

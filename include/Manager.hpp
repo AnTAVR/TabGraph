@@ -12,27 +12,37 @@
 
 #pragma once
 
-#include "Node.hpp"
-#include "Window.hpp"
+#include <chrono>
+#include "Property.hpp"
+//#include "Node.hpp"
+#include "SFML/Graphics.hpp"
+
+using namespace std::chrono;
 
 namespace TabGraph
 {
 	class Manager
 	{
-		public:
-			Manager();
-			~Manager();
-			static void		CreateWindow(
-								const int& x, const int& y,
-								const std::string& title);
-			static float	GetDeltaTime();
-			static float	GetTime();
+	private:
+		/*
+		** sf::RenderWindow est specifique pour les rendus 2D,
+		** autant utilise sf::Window, non ?
+		*/
+		HeapProperty<sf::RenderWindow>	_window;
+		Property<duration<double, std::micro>>	_deltaTime;
 
-		private:
-			void	UpdateDeltaTime();
-			void	UpdateNodes();
-			Window	*_window;
-			float	_deltaTime;
-			float	_time;
+		static void	UpdateEvents(sf::Event&);
+		static void	UpdateNodes();
+		static void	UpdateDeltaTime(time_point<steady_clock>& tic);
+
+	public:
+		Manager();
+		~Manager();
+
+		static void		CreateWindow(
+							const int& width, const int& height,
+							const std::string& title);
+		static double	GetDeltaTime();
+		static void		Run();
 	};
 }
