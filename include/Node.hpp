@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 16:09:53 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/04/20 19:32:18 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/04/21 15:37:53 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ namespace TabGraph
 		void	AddChild(Node* const);
 		void	RemoveChild(Node* const);
 
-		virtual void	update() = 0;
+		virtual void	Update() = 0;
 
 	protected:
 		/*

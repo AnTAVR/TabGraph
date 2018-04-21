@@ -6,13 +6,12 @@
 #    By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/18 14:51:09 by gpinchon          #+#    #+#              #
-#    Updated: 2018/04/20 19:44:21 by gpinchon         ###   ########.fr        #
+#    Updated: 2018/04/21 15:56:23 by gpinchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	TabGraph
-SRC			=	./src/Window.cpp \
-				./src/Manager.cpp \
+SRC			=	./src/Manager.cpp \
 				./src/Node.cpp \
 				./src/test.cpp
 

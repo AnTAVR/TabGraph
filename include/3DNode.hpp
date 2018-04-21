@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Window.hpp                                         :+:      :+:    :+:   */
+/*   3DNode.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/20 16:22:12 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/04/20 19:25:55 by gpinchon         ###   ########.fr       */
+/*   Created: 2018/04/21 15:38:02 by gpinchon          #+#    #+#             */
+/*   Updated: 2018/04/21 15:58:57 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include <Node.hpp>
 
-//#include "SFML\Graphics\RenderWindow.hpp"
-
-namespace TabGraph
-{
-	class Window
+namespace TabGraph {
+	class 3DNode : public Node
 	{
 	public:
-		Window(const int &, const int &, const std::string &);
-		~Window();
-
-	private:
-		Window();
+		3DNode();
+		~3DNode();
+		
 	};
 }
