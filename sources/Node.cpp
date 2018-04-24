@@ -15,40 +15,21 @@
 
 namespace TabGraph
 {
-	Node::Node() : _references(0)
-	{
-		AddRef();
-	}
+	Node::Node()
+	{}
+
 	Node::~Node()
+	{}
+
+	void	Node::AddChild(SharedNode& node)
 	{
-		Release();
-	}
-	void	Node::Release()
-	{
-		if (_references > 0)
-			--_references;
-	}
-	int		Node::GetRef() const
-	{
-		return (_references);
-	}
-	void	Node::AddRef()
-	{
-		++_references;
-	}
-	void	Node::AddChild(Node *const node)
-	{
-		if (!node)
-			return ;
-		node->AddRef();
 		_children.push_back(node);
 	}
-	void	Node::RemoveChild(Node *const node)
+
+	void	Node::RemoveChild(SharedNode& node)
 	{
 		auto found = std::find(_children.begin(), _children.end(), node);
-		if (found == _children.end())
-			return ;
-		std::remove(_children.begin(), _children.end(), node);
-		node->Release();
+		if (found != _children.end())
+			_children.erase(found);
 	}
 }

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <thread>
 #include "Manager.hpp"
 
 namespace TabGraph
@@ -22,42 +21,46 @@ namespace TabGraph
 	Manager::Manager() {}
 	Manager::~Manager() {}
 
-	void	Manager::CreateWindow(
-						const int& w, const int& h,
-						const std::string& t)
+	void	Manager::Init(const int& w, const int& h, const std::string& t)
 	{
-		handler._window = new sf::RenderWindow(sf::VideoMode(w, h), t);
+		handler._window = new sf::Window(sf::VideoMode(w, h), t);
 		handler._window()->setFramerateLimit(60);
 	}
 
-	/*
-	** http://www.cplusplus.com/reference/chrono/duration/count/
-	*/
-	double	Manager::GetDeltaTime()
+	float	Manager::GetDeltaTime()
 	{
-		return handler._deltaTime().count();
+		return handler._clock.getElapsedTime().asSeconds();
 	}
 
 	/* ********************************* */
+
+	void	Manager::UpdateNodes()
+	{}
 
 	inline void	Manager::UpdateEvents(sf::Event& ev)
 	{
 		while (handler._window()->pollEvent(ev))
 		{
-			if (ev.type == sf::Event::Closed)
+			if (ev.type == sf::Event::Closed ||
+				(ev.type == sf::Event::KeyReleased &&
+					ev.key.code == sf::Keyboard::Escape))
+			{
 				handler._window()->close();
+			}
+			else if (ev.type == sf::Event::Resized)
+			{
+				glViewport(0, 0, ev.size.width, ev.size.height);
+			}
 		}
 	}
 
-	/*
-	** http://www.cplusplus.com/reference/chrono/high_resolution_clock/now/
-	*/
-	inline void	Manager::UpdateDeltaTime(time_point<steady_clock>& tic)
+	void	Manager::UpdateTitle()
 	{
-		handler._deltaTime = duration_cast<duration<double, std::micro>>(
-			high_resolution_clock::now() - tic);
-		// ligne necessaire ?
-		//std::this_thread::sleep_for(handler._deltaTime());
+		handler._window()->setTitle("ShaderPixel ~ 42 (" +
+			std::to_string(
+				static_cast<int>(
+					1.f / handler._clock.restart().asSeconds())) +
+			" fps)" );
 	}
 
 	/* ********************************* */
@@ -65,15 +68,21 @@ namespace TabGraph
 	void	Manager::Run()
 	{
 		sf::Event ev;
-		time_point<steady_clock> tic;
+
+		glDrawBuffer(GL_BACK);
+		glClearColor(0.128f, 0.128f, 0.128f, 1.f);
 
 		while (handler._window()->isOpen())
 		{
-			tic = high_resolution_clock::now();
+			glClear(GL_COLOR_BUFFER_BIT);
 			UpdateEvents(ev);
+			/* *************** */
 
-			// some things
-			UpdateDeltaTime(tic);
+			// ...
+
+			/* *************** */
+			handler._window()->display();
+			UpdateTitle();
 		}
 	}
 }

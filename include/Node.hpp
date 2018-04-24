@@ -13,6 +13,7 @@
 #pragma once
 
 #include <vector>
+#include "Property.hpp"
 
 namespace TabGraph
 {
@@ -21,23 +22,16 @@ namespace TabGraph
 	public:
 		Node();
 		virtual ~Node();
-		void	Release();
-		int		GetRef() const;
-		void	AddRef();
-		void	AddChild(Node* const);
-		void	RemoveChild(Node* const);
 
-		virtual void	update() = 0;
+		using SharedNode = std::shared_ptr<Node>;
+
+		void	AddChild(SharedNode& node);
+		void	RemoveChild(SharedNode& node);
+
+		virtual void	Update() = 0;
+
 
 	protected:
-		/*
-		** Au lieu d'utiliser une variable int,
-		** il faudrait reflechir a l'utilisation de shared_ptr :
-		** http://en.cppreference.com/w/cpp/memory/shared_ptr
-		** c'est + mieux o/
-		** https://stackoverflow.com/questions/106508/what-is-a-smart-pointer-and-when-should-i-use-one
-		*/
-		int					_references;
-		std::vector<Node*> _children;
+		std::vector<SharedNode> _children;
 	};
 }

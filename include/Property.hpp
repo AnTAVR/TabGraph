@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abartz <abartz@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/21 16:47:42 by abartz            #+#    #+#             */
+/*   Updated: 2018/04/23 15:03:04 by abartz           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #pragma once
 
@@ -5,11 +16,6 @@
 
 namespace TabGraph
 {
-	/*
-	** Par ce que les templates c'est la Vie !
-	** https://stackoverflow.com/questions/8368512/does-c11-have-c-style-properties
-	*/
-
 	template <typename T>
 	class Property
 	{
@@ -22,22 +28,6 @@ namespace TabGraph
 		T value;
 	};
 
-	/*template <typename Ptr>
-	class HeapProperty
-	{
-	public:
-		HeapProperty() : value(nullptr) {}
-		virtual ~HeapProperty() { if (value) delete value; }
-		virtual Ptr* const operator= (Ptr* const f) { return value = f; }
-		virtual Ptr* const operator() (void) const { return value; }
-
-	protected:
-		Ptr* value;
-	};*/
-
-	/*
-	** Les smart pointers aussi c'est la Vie !
-	*/
 	template <typename T>
 	class HeapProperty
 	{
