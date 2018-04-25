@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include <vector>
+#include "GLObjs.hpp"
 #include "Property.hpp"
 
 namespace TabGraph
@@ -32,6 +32,9 @@ namespace TabGraph
 
 
 	protected:
+		glm::vec3	_position;
+		glm::mat4x4	_mvp;
+
 		std::vector<SharedNode> _children;
 	};
 }

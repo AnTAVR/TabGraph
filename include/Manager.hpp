@@ -13,8 +13,7 @@
 #pragma once
 
 #include "SFML/OpenGL.hpp"
-#include "SFML/Graphics.hpp"
-#include "Property.hpp"
+#include "SFML/Window/Window.hpp"
 #include "Node.hpp"
 
 namespace TabGraph
@@ -23,8 +22,9 @@ namespace TabGraph
 	{
 	private:
 		HeapProperty<sf::Window>	_window;
-
 		sf::Clock	_clock;
+
+
 
 		static void	UpdateNodes();
 		static void	UpdateEvents(sf::Event&);

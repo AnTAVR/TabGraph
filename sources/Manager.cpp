@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "SFML/Window/Event.hpp"
 #include "Manager.hpp"
 
 namespace TabGraph
@@ -54,7 +55,7 @@ namespace TabGraph
 		}
 	}
 
-	void	Manager::UpdateTitle()
+	inline void	Manager::UpdateTitle()
 	{
 		handler._window()->setTitle("ShaderPixel ~ 42 (" +
 			std::to_string(
