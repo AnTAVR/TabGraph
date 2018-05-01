@@ -6,12 +6,13 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 16:13:27 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/04/20 19:52:54 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/04/27 16:34:42 by abartz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include <functional>
 #include "SFML/OpenGL.hpp"
 #include "SFML/Window/Window.hpp"
 #include "Node.hpp"
@@ -24,7 +25,9 @@ namespace TabGraph
 		HeapProperty<sf::Window>	_window;
 		sf::Clock	_clock;
 
-
+		std::function<void()>	_keysCallback;
+		std::function<void()>	_mouseCallback;
+		std::function<void()>	_scrollCallback;
 
 		static void	UpdateNodes();
 		static void	UpdateEvents(sf::Event&);
