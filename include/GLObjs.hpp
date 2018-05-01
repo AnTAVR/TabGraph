@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   GLObjs.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abartz <abartz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 16:47:42 by abartz            #+#    #+#             */
-/*   Updated: 2018/04/23 15:03:04 by abartz           ###   ########.fr       */
+/*   Updated: 2018/05/01 14:24:27 by abartz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 #include <string>
 #include <vector>
-#include "SFML\Graphics\Shader.hpp"
-#include "glm\vec2.hpp"
-#include "glm\vec3.hpp"
-#include "glm\mat4x4.hpp"
+#include "SFML/Graphics/Shader.hpp"
+#include "glm/vec2.hpp"
+#include "glm/vec3.hpp"
+#include "glm/mat4x4.hpp"
 
 struct Vertex 
 {

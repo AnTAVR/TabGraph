@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Property.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abartz <abartz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 16:47:42 by abartz            #+#    #+#             */
-/*   Updated: 2018/04/23 15:03:04 by abartz           ###   ########.fr       */
+/*   Updated: 2018/05/01 16:08:14 by abartz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,39 @@
 
 #include <memory>
 
-namespace TabGraph
+template <typename T>
+class Property
 {
-	template <typename T>
-	class Property
+public:
+	Property() {}
+	//Property(Property& p) : value(p()) {}
+	//Property(T& v) : value(v) {}
+	Property(T&& v) { std::swap(value, v); }
+	//virtual ~Property() {}
+
+	virtual T const & operator() (void) const { return value; }
+
+protected:
+	T value;
+};
+
+template <typename T>
+using uPtr = std::unique_ptr<T>;
+
+template <typename T>
+using UProperty = Property<uPtr<T>>;
+
+template <typename T>
+class SmartProperty : public UProperty<T>
+{
+public:
+	SmartProperty() : UProperty<T>() {}
+	SmartProperty(T& v) : UProperty<T>(uPtr<T>(new T(v))) {}
+	//virtual ~SmartProperty() {}
+
+	virtual uPtr<T>& operator= (T* const f)
 	{
-	public:
-		virtual ~Property() {}
-		virtual T& operator= (const T& f) { return value = f; }
-		virtual T const & operator() (void) const { return value; }
-
-	protected:
-		T value;
-	};
-
-	template <typename T>
-	class HeapProperty
-	{
-	public:
-		virtual ~HeapProperty() {}
-		virtual std::unique_ptr<T>& operator= (T* const f)
-		{
-			value.reset(f);
-			return value;
-		}
-		virtual T* const operator() (void) const
-		{
-			return value.get();
-		}
-
-	protected:
-		std::unique_ptr<T> value;
-	};
-}
+		this->value.reset(f);
+		return this->value;
+	}
+};

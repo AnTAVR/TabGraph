@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Manager.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abartz <abartz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 16:13:27 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/04/27 16:34:42 by abartz           ###   ########.fr       */
+/*   Updated: 2018/05/01 16:13:31 by abartz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,19 @@ namespace TabGraph
 	class Manager
 	{
 	private:
-		HeapProperty<sf::Window>	_window;
-		sf::Clock	_clock;
+
+		SmartProperty<sf::Window>	_window;
+		//sf::Clock	_clock;
 
 		std::function<void()>	_keysCallback;
 		std::function<void()>	_mouseCallback;
 		std::function<void()>	_scrollCallback;
 
+		
+
 		static void	UpdateNodes();
-		static void	UpdateEvents(sf::Event&);
-		static void	UpdateTitle();
+		static void	UpdateEvents();
+		//static void	UpdateTitle();
 
 	public:
 		Manager();
@@ -40,6 +43,6 @@ namespace TabGraph
 		static void	Init(const int& width, const int& height, const std::string& title);
 		static void	Run();
 
-		static float	GetDeltaTime();
+		//static float	GetDeltaTime();
 	};
 }

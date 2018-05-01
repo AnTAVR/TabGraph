@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Manager.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abartz <abartz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 19:23:45 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/04/20 19:45:52 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/05/01 18:16:20 by abartz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,19 @@ namespace TabGraph
 		handler._window()->setFramerateLimit(60);
 	}
 
-	float	Manager::GetDeltaTime()
+	/*inline float	Manager::GetDeltaTime()
 	{
 		return handler._clock.getElapsedTime().asSeconds();
-	}
+	}*/
 
 	/* ********************************* */
 
 	void	Manager::UpdateNodes()
 	{}
 
-	inline void	Manager::UpdateEvents(sf::Event& ev)
+	inline void	Manager::UpdateEvents()
 	{
+		sf::Event ev;
 		while (handler._window()->pollEvent(ev))
 		{
 			if (ev.type == sf::Event::Closed ||
@@ -55,35 +56,24 @@ namespace TabGraph
 		}
 	}
 
-	inline void	Manager::UpdateTitle()
-	{
-		handler._window()->setTitle("ShaderPixel ~ 42 (" +
-			std::to_string(
-				static_cast<int>(
-					1.f / handler._clock.restart().asSeconds())) +
-			" fps)" );
-	}
-
 	/* ********************************* */
 
 	void	Manager::Run()
 	{
-		sf::Event ev;
-
 		glDrawBuffer(GL_BACK);
 		glClearColor(0.128f, 0.128f, 0.128f, 1.f);
+		glEnable(GL_DEPTH_TEST);
 
 		while (handler._window()->isOpen())
 		{
-			glClear(GL_COLOR_BUFFER_BIT);
-			UpdateEvents(ev);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			UpdateEvents();
 			/* *************** */
 
 			// ...
 
 			/* *************** */
 			handler._window()->display();
-			UpdateTitle();
 		}
 	}
 }
